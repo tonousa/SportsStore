@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 
-namespace SportsStore.WebUI.App_Start
+namespace SportsStore.WebUI
 {
     public class BundleConfig
     {
