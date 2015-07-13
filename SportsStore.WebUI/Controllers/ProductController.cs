@@ -34,7 +34,7 @@ namespace SportsStore.WebUI.Controllers
                     TotalItems = repository.Products.Count()
                 }
             };
-            return View(repository.Products);
+            return View(model);
         }
     }
 }
