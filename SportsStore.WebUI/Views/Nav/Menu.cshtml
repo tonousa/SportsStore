@@ -4,10 +4,14 @@
 
 @foreach(var link in Model)
 {
-    @Html.RouteLink(link, new { 
+    @Html.RouteLink(link, new
+    {
         Controller = "Product",
         Action = "List",
         category = link,
         page = 1
+    },
+    new { 
+        @class = link == ViewBag.SelectedCategory ? "selected" : null
     })
 }
