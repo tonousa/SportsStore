@@ -67,7 +67,7 @@ namespace SportsStore.WebUI.Controllers
         { 
             if (cart.Lines.Count() == 0)
             {
-                ModelState.AddModelError("", "Sorry, your cat is empty!");
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
             }
 
             if (ModelState.IsValid)
