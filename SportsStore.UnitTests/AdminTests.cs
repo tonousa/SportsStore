@@ -36,5 +36,11 @@ namespace SportsStore.UnitTests
             Assert.AreEqual("P2", result[1].Name);
             Assert.AreEqual("P3", result[2].Name);
         }
+
+        [TestMethod]
+        public void Can_Save_Valid_Changes()
+        {
+
+        }
     }
 }
