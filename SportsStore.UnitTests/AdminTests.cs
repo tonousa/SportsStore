@@ -48,7 +48,7 @@ namespace SportsStore.UnitTests
             Product product = new Product { Name = "Test" };
 
             // Act - try to save the product
-            ActionResult result = target.Edit(product);
+            ActionResult result = target.Edit(product, null);
 
             // Assert - check that the repository was called
             mock.Verify(m => m.SaveProduct(product));
@@ -70,12 +70,39 @@ namespace SportsStore.UnitTests
             target.ModelState.AddModelError("error", "error");
 
             // Act - try to save the product
-            ActionResult result = target.Edit(product);
+            ActionResult result = target.Edit(product, null);
 
             // Assert - check that the repo was not called
             mock.Verify(m => m.SaveProduct(It.IsAny<Product>()), Times.Never);
             // Assert - check the method result type
             Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Products()
+        {
+            // Arrange- create a product
+            Product prod = new Product { ProductID = 2, Name = "Test" };
+
+            // Arrange - create the mock repository
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {ProductID=1, Name="P1"},
+                prod,
+                new Product {ProductID=3, Name="P3"},
+            }.AsQueryable());
+
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+
+            // Act - delete the product
+            target.Delete(prod.ProductID);
+
+            // Asser - ensure that the repository delete method was 
+            // called with the corrent Product
+            mock.Verify(m => m.DeleteProduct(prod.ProductID));
+
+
         }
     }
 }
